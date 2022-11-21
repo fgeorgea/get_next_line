@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgeorgea <fgeorgea@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:08:39 by fgeorgea          #+#    #+#             */
-/*   Updated: 2022/11/21 12:17:39 by fgeorgea         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:18:13 by fgeorgea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	check_eol(char *str)
 {
@@ -59,18 +59,18 @@ static char	*get_line(char *line, char *tmp, int *check_nl, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	tmp[BUFFER_SIZE + 1];
+	static char	tmp[OPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	int			check_nl;
 
 	if ((fd < 0 || fd >= OPEN_MAX) || BUFFER_SIZE <= 0)
 		return (NULL);
 	check_nl = -1;
-	line = ft_strdup(tmp, &check_nl);
+	line = ft_strdup(tmp[fd], &check_nl);
 	if (!line)
 		return (NULL);
-	ft_strlcpy(tmp, &tmp[check_nl + 1], BUFFER_SIZE + 1);
-	line = get_line(line, tmp, &check_nl, fd);
+	ft_strlcpy(tmp[fd], &tmp[fd][check_nl + 1], BUFFER_SIZE + 1);
+	line = get_line(line, tmp[fd], &check_nl, fd);
 	if (!line || line[0] == '\0')
 	{	
 		free(line);
