@@ -6,7 +6,7 @@
 /*   By: fgeorgea <fgeorgea@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:54:05 by fgeorgea          #+#    #+#             */
-/*   Updated: 2022/11/10 15:39:02 by fgeorgea         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:09:28 by fgeorgea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ int	main(void)
 {
 	int	fd;
 	char *str;
-	int	i;
 
-	i = 1;
-	fd = open("text.txt", O_RDONLY);
-	while (i < 10)
+	fd = open("get_next_line.c", O_RDONLY);
+	str = get_next_line(fd);
+	while (str != NULL)
 	{
-		str = get_next_line(fd);
 		printf("%s", str);
-		i++;
 		free(str);
+		str = get_next_line(fd);
 	}
-	system("leaks a.out");
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: fgeorgea <fgeorgea@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:06:24 by fgeorgea          #+#    #+#             */
-/*   Updated: 2022/11/21 12:18:37 by fgeorgea         ###   ########.fr       */
+/*   Updated: 2023/02/01 13:12:37 by fgeorgea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #  define BUFFER_SIZE 3
 # endif
 # if BUFFER_SIZE > 10000
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 10000
+# elif BUFFER_SIZE < 1
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 10000
 # endif
